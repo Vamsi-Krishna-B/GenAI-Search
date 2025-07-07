@@ -4,11 +4,6 @@ from langchain_community.utilities import ArxivAPIWrapper,WikipediaAPIWrapper
 from langchain_community.tools import ArxivQueryRun,WikipediaQueryRun,DuckDuckGoSearchRun
 from langchain.agents import initialize_agent,AgentType
 from langchain.callbacks import StreamlitCallbackHandler
-import os 
-from dotenv import load_dotenv
-load_dotenv()
-api_key = os.getenv("GROQ_API_KEY")
-
 
 api_wrapper_wiki = WikipediaAPIWrapper(top_k_results=1,doc_content_chars_max=250)
 wiki = WikipediaQueryRun(api_wrapper=api_wrapper_wiki)
@@ -19,6 +14,7 @@ arxiv = ArxivQueryRun(api_wrapper=api_wrapper_arxiv)
 search = DuckDuckGoSearchRun(name="Search")
 
 st.title("LangChain with Chat with Search")
+api_key = st.sidebar.text_input("Enter your groq api key:",type="password")
 
 # StreamLit Call back ah delr to display how agents interatc with tools in stream lit
 
